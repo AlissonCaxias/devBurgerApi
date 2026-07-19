@@ -1,11 +1,9 @@
-import express from "express";
-
-const app = express();
+import app from "./app.js";
 
 app.get("/", (req, res) => {
-  res.send("API funcionando!");
+  res.send("API funcionando 100%");
 });
 
-app.listen(3000, () => {
-  console.log("Servidor rodando na porta 3000");
+app.listen(3001, () => {
+  console.log("Servidor rodando na porta 3001");
 });
