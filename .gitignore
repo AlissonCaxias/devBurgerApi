@@ -21,3 +21,6 @@ coverage/
 # Build
 dist/
 build/
+
+#db
+db/
