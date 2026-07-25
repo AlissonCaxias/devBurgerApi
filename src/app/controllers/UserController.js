@@ -6,6 +6,16 @@ class UserController {
 	async store(req, res) {
 		const { name, email, password_hash, admin } = req.body;
 
+		const userAlreadyExists = await User.findOne({
+			where: { email },
+		});
+
+		if (userAlreadyExists) {
+			return res.status(400).json({
+				error: 'Usuário já cadastrado!',
+			});
+		}
+
 		try {
 			await User.create({
 				id: uuidv4(),
@@ -16,7 +26,7 @@ class UserController {
 			});
 
 			return res.status(201).json({
-				message: 'User created successfully',
+				message: 'Usuário cadastrado com sucesso!',
 				user: {
 					name,
 					email,
@@ -26,8 +36,7 @@ class UserController {
 		} catch (error) {
 			console.error('[UserController.store] Erro:', error);
 			return res.status(500).json({
-				error: 'Falha ao criar usuário',
-				details: error.message,
+				error: 'Falha ao cadastrar usuário',
 			});
 		}
 	}
