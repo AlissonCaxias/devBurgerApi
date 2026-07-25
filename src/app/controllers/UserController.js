@@ -6,10 +6,9 @@ class UserController {
 	async store(req, res) {
 		const { name, email, password_hash, admin } = req.body;
 
-		const userAlreadyExists = await User.findOne({
+		const userAlreadyExists = User.findOne({
 			where: { email },
 		});
-
 		if (userAlreadyExists) {
 			return res.status(400).json({
 				error: 'Usuário já cadastrado!',
