@@ -18,6 +18,8 @@
 #         condition: service_healthy
 services:
   server:
+    env_file: 
+      - .env
     container_name: devBurgerApi-server
     build:
       context: .
