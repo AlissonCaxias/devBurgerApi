@@ -22,7 +22,7 @@ services:
     build:
       context: .
     environment:
-      NODE_ENV: production
+      NODE_ENV: development
       DB_HOST: db
       DB_USER: admin
       DB_PASSWORD_FILE: /run/secrets/db-password
@@ -30,6 +30,9 @@ services:
       DB_PORT: 5432
     ports:
       - "3001:3001"
+    volumes:
+      - ./src:/usr/src/app/src  # hot-reload: sincroniza código local com o container
+    command: npx nodemon src/server.js
     depends_on:
       db:
         condition: service_healthy
@@ -52,7 +55,7 @@ services:
     secrets:
       - db-password
     healthcheck:
-      test: ["CMD", "pg_isready", "-U", "admin"]
+      test: ["CMD", "pg_isready", "-U", "admin", "-d", "dev-burger-db"]
       interval: 10s
       timeout: 5s
       retries: 5

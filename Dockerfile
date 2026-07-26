@@ -20,6 +20,12 @@ RUN --mount=type=cache,target=/root/.npm \
 
 WORKDIR /usr/src/app
 
+# 👇 garante que o usuário node seja dono da pasta antes de trocar de usuário
+RUN chown -R node:node /usr/src/app
+
+# Run the application as a non-root user.
+USER node
+
 # Download dependencies as a separate step to take advantage of Docker's caching.
 # Leverage a cache mount to /root/.local/share/pnpm/store to speed up subsequent builds.
 # Leverage a bind mounts to package.json and pnpm-lock.yaml to avoid having to copy them into
@@ -27,13 +33,10 @@ WORKDIR /usr/src/app
 RUN --mount=type=bind,source=package.json,target=package.json \
     --mount=type=bind,source=pnpm-lock.yaml,target=pnpm-lock.yaml \
     --mount=type=cache,target=/root/.local/share/pnpm/store \
-    pnpm install --prod --frozen-lockfile
-
-# Run the application as a non-root user.
-USER node
+    pnpm install --frozen-lockfile
 
 # Copy the rest of the source files into the image.
-COPY . .
+COPY --chown=node:node . .
 
 # Expose the port that the application listens on.
 EXPOSE 3001
