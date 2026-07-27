@@ -6,14 +6,16 @@ class SessionController {
     async store(req, res) {
         const { email, password } = req.body;
 
+        const EmailorPasswordIncorrect = () => res.status(401).json({ error: 'Email ou Senha inválidos' });
+
         const user = await User.findOne({ where: { email } });
         if (!user) {
-            return res.status(401).json({ error: 'Usuário ou senha inválidos' });
+            EmailorPasswordIncorrect();
         }
 
         const isValid = await bcrypt.compare(password, user.password_hash);
         if (!isValid) {
-            return res.status(401).json({ error: 'Usuário ou senha inválidos' });
+            EmailorPasswordIncorrect();
         }
 
         const { id, name, admin } = user;
