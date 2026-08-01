@@ -3,6 +3,7 @@ import { Router } from 'express';
 import UserController from './app/controllers/UserController.js';
 import SessionController from './app/controllers/SessionController.js';
 import ProductController from './app/controllers/ProductController.js';
+import CategoryController from './app/controllers/CategoryController.js';
 import authMiddleware from './app/middlewares/auth.js';
 import multer from 'multer';
 import multerConfig from './config/multer.cjs';

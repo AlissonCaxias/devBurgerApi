@@ -1,4 +1,5 @@
 import Product from '../models/Products.js';
+import { UniqueConstraintError } from 'sequelize';
 import Yup from 'yup';
 
 class ProductController {
@@ -28,6 +29,12 @@ class ProductController {
 
             return res.status(201).json({ product });
         } catch (error) {
+            if (error instanceof UniqueConstraintError) {
+                return res.status(400).json({
+                    error: 'Produto com mesmo nome não pode ser adicionado, apenas alterado.',
+                });
+            }
+
             console.error('[ProductController.store] Erro:', error);
             return res.status(500).json({ error: 'Falha ao criar produto' });
         }

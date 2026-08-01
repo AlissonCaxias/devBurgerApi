@@ -12,6 +12,7 @@ class Product extends Model {
                 name: {
                     type: DataTypes.STRING,
                     allowNull: false,
+                    unique: true,
                 },
                 price: {
                     type: DataTypes.FLOAT,
