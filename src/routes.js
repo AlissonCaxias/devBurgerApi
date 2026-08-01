@@ -22,5 +22,7 @@ router.use(authMiddleware);
 router.post('/products', upload.single('image'), ProductController.store);
 router.get('/users', UserController.index);
 router.get('/products', ProductController.index);
+router.post('/categories', upload.single('image'), CategoryController.store);
+router.get('/categories', CategoryController.index);
 
 export default router;

@@ -1,9 +1,10 @@
 import { Sequelize } from 'sequelize';
-import databaseConfig from '../config/database.cjs';
-import User from '../app/models/User.js';
+import databaseConfig from '../config/database.cjs'; // 👈 importa o config
+import User from '../app/models/User.js'; // 👈 importa o User
 import Product from '../app/models/Products.js'; // 👈 importa o Product
+import Category from '../app/models/Category.js';  // 👈 importa o Category
 
-const models = [User, Product]; // 👈 adiciona à lista
+const models = [User, Product, Category]; // 👈 adiciona à lista
 
 class Database {
 	constructor() {
