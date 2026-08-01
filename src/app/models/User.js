@@ -2,7 +2,7 @@ import { DataTypes, Model } from 'sequelize';
 
 class User extends Model {
     static init(sequelize) {
-        Model.init(
+        super.init(
             {
                 name: {
                     type: DataTypes.STRING,
@@ -28,6 +28,7 @@ class User extends Model {
                 tableName: 'users',
             }
         );
+        return this;
     }
 }
 

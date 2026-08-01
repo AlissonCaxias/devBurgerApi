@@ -14,13 +14,13 @@ const upload = multer(multerConfig);
 // Rotas públicas (não exigem token)
 router.post('/users', UserController.store);
 router.post('/login', SessionController.store);
-router.post('/products',upload.single('image'), ProductController.store);
-router.get('/products', ProductController.index);
+
 
 // A partir daqui, todas as rotas exigem token JWT válido
 router.use(authMiddleware);
 
+router.post('/products', upload.single('image'), ProductController.store);
 router.get('/users', UserController.index);
-/*router.get('/products', ProductController.index);*/
+router.get('/products', ProductController.index);
 
 export default router;

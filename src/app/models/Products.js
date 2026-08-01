@@ -2,7 +2,7 @@ import { DataTypes, Model } from 'sequelize';
 
 class Product extends Model {
     static init(sequelize) {
-        Model.init(
+        super.init(
             {
                 id: {
                     type: DataTypes.INTEGER,
@@ -39,6 +39,7 @@ class Product extends Model {
                 underscored: true,       // 👈 usa created_at/updated_at (snake_case) em vez de createdAt/updatedAt
             }
         );
+        return this;
     }
 }
 
