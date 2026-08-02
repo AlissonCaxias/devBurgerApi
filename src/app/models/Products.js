@@ -42,6 +42,9 @@ class Product extends Model {
         );
         return this;
     }
+    static associate(models) {
+        this.belongsTo(models.Category, { foreignKey: 'category_id', as: 'category' });
+    }
 }
 
 export default Product;
