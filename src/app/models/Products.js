@@ -18,8 +18,8 @@ class Product extends Model {
                     type: DataTypes.FLOAT,
                     allowNull: false,
                 },
-                category: {
-                    type: DataTypes.STRING,
+                category_id: {
+                    type: DataTypes.INTEGER,
                     allowNull: false,
                 },
                 image: {

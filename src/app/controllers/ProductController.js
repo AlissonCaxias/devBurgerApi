@@ -7,7 +7,7 @@ class ProductController {
         const schema = Yup.object({
             name: Yup.string().required(),
             price: Yup.number().required(),
-            category: Yup.string().required(),
+            category_id: Yup.number().integer().required(),
             image: Yup.string().nullable(),
         });
 
@@ -22,10 +22,10 @@ class ProductController {
             image = req.file.filename;
         }
 
-        const { name, price, category } = req.body;
+        const { name, price, category_id } = req.body;
 
         try {
-            const product = await Product.create({ name, price, category, image });
+            const product = await Product.create({ name, price, category_id, image });
 
             return res.status(201).json({ product });
         } catch (error) {
