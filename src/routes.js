@@ -7,6 +7,7 @@ import CategoryController from './app/controllers/CategoryController.js';
 import authMiddleware from './app/middlewares/auth.js';
 import multer from 'multer';
 import multerConfig from './config/multer.cjs';
+import adminMiddleware from './app/middlewares/admin.js';
 
 const router = new Router();
 
@@ -20,10 +21,10 @@ router.post('/login', SessionController.store);
 // A partir daqui, todas as rotas exigem token JWT válido
 router.use(authMiddleware);
 
-router.post('/products', upload.single('image'), ProductController.store);
+router.post('/products', adminMiddleware, upload.single('image'), ProductController.store);
 router.get('/users', UserController.index);
 router.get('/products', ProductController.index);
-router.post('/categories', upload.single('image'), CategoryController.store);
+router.post('/categories', adminMiddleware, upload.single('image'), CategoryController.store);
 router.get('/categories', CategoryController.index);
 
 export default router;

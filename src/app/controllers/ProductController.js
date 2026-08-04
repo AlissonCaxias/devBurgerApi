@@ -1,6 +1,8 @@
 import Product from '../models/Products.js';
 import { UniqueConstraintError } from 'sequelize';
 import Yup from 'yup';
+import Category from '../models/Category.js';
+
 
 class ProductController {
     async store(req, res) {
@@ -41,7 +43,15 @@ class ProductController {
     }
 
     async index(_req, res) {
-        const products = await Product.findAll();
+        const products = await Product.findAll({
+            include:
+            {
+                model: Category,
+                as: 'category',
+                attributes: ['name']
+            },
+
+        });
         return res.status(200).json(products);
     }
 }
