@@ -22,6 +22,7 @@ router.post('/login', SessionController.store);
 router.use(authMiddleware);
 
 router.post('/products', adminMiddleware, upload.single('image'), ProductController.store);
+router.put('/products/:id', adminMiddleware, upload.single('image'), ProductController.update);
 router.get('/users', UserController.index);
 router.get('/products', ProductController.index);
 router.post('/categories', adminMiddleware, upload.single('image'), CategoryController.store);

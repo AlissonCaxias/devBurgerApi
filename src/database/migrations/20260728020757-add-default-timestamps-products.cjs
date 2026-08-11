@@ -5,12 +5,12 @@ module.exports = {
     await queryInterface.changeColumn('products', 'created_at', {
       type: Sequelize.DATE,
       allowNull: false,
-      defaultValue: Sequelize.NOW,
+      defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
     });
     await queryInterface.changeColumn('products', 'updated_at', {
       type: Sequelize.DATE,
       allowNull: false,
-      defaultValue: Sequelize.NOW,
+      defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
     });
   },
 

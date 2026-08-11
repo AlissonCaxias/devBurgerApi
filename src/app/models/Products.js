@@ -26,6 +26,10 @@ class Product extends Model {
                     type: DataTypes.STRING,
                     allowNull: true,
                 },
+                offer: {
+                    type: DataTypes.BOOLEAN,
+                    allowNull: false,
+                },
                 url: {
                     type: DataTypes.VIRTUAL,
                     get() {
