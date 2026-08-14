@@ -33,7 +33,7 @@ class Product extends Model {
                 url: {
                     type: DataTypes.VIRTUAL,
                     get() {
-                        return this.image ? `http://localhost:3001/files/${this.image}` : null;
+                        return this.image ? `http://localhost:3001/products-files/${this.image}` : null;
                     },
                 },
             },

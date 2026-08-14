@@ -12,7 +12,7 @@ const app = express();
 
 app.use(express.json()); // habilita o parser de JSON
 app.use('/files', express.static(resolve(__dirname, '..', 'uploads')));
-
+app.use('/categories-files', express.static(resolve(__dirname, '..', 'uploads')));
 app.use(router);
 
 export default app;

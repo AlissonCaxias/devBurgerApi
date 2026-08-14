@@ -48,6 +48,9 @@ importers:
       '@biomejs/biome':
         specifier: 2.5.4
         version: 2.5.4
+      create-cjs-migration:
+        specifier: ^1.0.0
+        version: 1.0.0
       nodemon:
         specifier: ^3.1.14
         version: 3.1.14
@@ -275,6 +278,11 @@ packages:
   cors@2.8.6:
     resolution: {integrity: sha512-tJtZBBHA6vjIAaF6EnIaq6laBBP9aq/Y3ouVJjEfoHbRBcHBAHYcMh/w8LDrk2PvIMMq8gmopa5D4V8RmbrxGw==}
     engines: {node: '>= 0.10'}
+
+  create-cjs-migration@1.0.0:
+    resolution: {integrity: sha512-MBOjbXIM79E6kxwcgoZ5kQ6cy1W7TZ3u5k0EKs9mF4q0ddmeUSvi1Dmp4S/bx+pZFvbusLE4uYbmkPAtFU6yJw==}
+    engines: {node: '>=18'}
+    hasBin: true
 
   cross-spawn@7.0.6:
     resolution: {integrity: sha512-uV2QOWP2nWzsy2aMp8aRibhi9dlzF5Hgh5SHaB9OiTGEyDTiJJyx0uy51QXdyWbtAHNua4XJzUKca3OzKUd3vA==}
@@ -1207,6 +1215,8 @@ snapshots:
     dependencies:
       object-assign: 4.1.1
       vary: 1.1.2
+
+  create-cjs-migration@1.0.0: {}
 
   cross-spawn@7.0.6:
     dependencies:

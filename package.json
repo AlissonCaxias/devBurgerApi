@@ -7,7 +7,10 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "node --watch src/server.js",
     "lint": "biome check .",
-    "format": "biome format ."
+    "format": "biome format .",
+    "migrate": "pnpm sequelize db:migrate",
+    "migrate:undo": "pnpm sequelize db:migrate:undo",
+    "migration": "create-cjs-migration"
   },
   "keywords": [],
   "author": "",
@@ -29,6 +32,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "2.5.4",
+    "create-cjs-migration": "^1.0.0",
     "nodemon": "^3.1.14",
     "sequelize-cli": "^6.6.5"
   }

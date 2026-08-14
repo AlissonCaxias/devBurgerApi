@@ -9,6 +9,11 @@ class CategoryController {
     async store(req, res) {
         const { name } = req.body;
 
+        let image;
+        if (req.file) {
+            image = req.file.filename;
+        }
+
         const alreadyExists = await Category.findOne({
             where: { name }
         })
@@ -17,7 +22,7 @@ class CategoryController {
             return res.status(400).json({ error: 'Category already exists' });
         }
 
-        const category = await Category.create({ name });
+        const category = await Category.create({ name, image });
 
         return res.status(201).json(category);
     }
