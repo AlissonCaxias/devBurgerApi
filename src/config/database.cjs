@@ -16,9 +16,4 @@ module.exports = {
 	password: dbPassword,
 	database: process.env.DB_NAME || 'dev-burger-db',
 	define: { timestamps: true, underscored: true, underscoredAll: true },
-	timezone: 'America/Sao_Paulo',
-	dialectOptions: {
-		timezone: 'America/Sao_Paulo',
-		useUTC: false,
-	},
 };

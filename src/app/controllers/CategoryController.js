@@ -1,11 +1,12 @@
 import Category from "../models/Category.js";
 import * as Yup from 'yup';
+import FormatterTemp from '../utils/formatterTemp.js';
 
 class CategoryController {
     // Rota para listar todas as categorias
     async index(_req, res) {
         const categories = await Category.findAll();
-        return res.json(categories);
+        return res.json(categories.map(c => FormatterTemp.formatData(c)));
     }
 
     // Rota para criar uma nova categoria
@@ -36,7 +37,7 @@ class CategoryController {
 
         const category = await Category.create({ name, image });
 
-        return res.status(201).json(category);
+        return res.status(201).json(FormatterTemp.formatData(category));
     }
 
     // Rota para atualizar uma categoria existente
@@ -64,10 +65,17 @@ class CategoryController {
         if (alreadyExists) {
             return res.status(400).json({ error: 'Category already exists' });
         }
-        const id = await Category.findByPk(req.params.id);
-        const category = await Category.update({ name, image }, { where: { id } });
+        const { id } = req.params;
+        const categoryExists = await Category.findByPk(id);
+        
+        if (!categoryExists) {
+            return res.status(400).json({ error: 'Category not found' });
+        }
 
-        return res.status(200).json(category);
+        await Category.update({ name, image }, { where: { id } });
+        const updatedCategory = await Category.findByPk(id);
+
+        return res.status(200).json(FormatterTemp.formatData(updatedCategory));
     }
 }
 

@@ -3,19 +3,7 @@ import { UniqueConstraintError } from 'sequelize';
 import Yup from 'yup';
 import Category from '../models/Category.js';
 
-const formatTimestamp = (date) =>
-  date?.toLocaleString('pt-BR', {
-    timeZone: 'America/Sao_Paulo',
-  });
-
-const formatProduct = (product) => {
-  const formatted = product.toJSON ? product.toJSON() : { ...product };
-  return {
-    ...formatted,
-    createdAt: formatTimestamp(formatted.createdAt),
-    updatedAt: formatTimestamp(formatted.updatedAt),
-  };
-};
+import FormatterTemp from '../utils/formatterTemp.js';
 
 class ProductController {
     async store(req, res) {
@@ -48,7 +36,7 @@ class ProductController {
                 image,
                 offer });
 
-            return res.status(201).json({ product: formatProduct(product) });
+            return res.status(201).json({ product: FormatterTemp.formatData(product) });
         } catch (error) {
             if (error instanceof UniqueConstraintError) {
                 return res.status(400).json({
@@ -117,7 +105,7 @@ class ProductController {
             },
 
         });
-        return res.status(200).json(products.map(formatProduct));
+        return res.status(200).json(products.map(p => FormatterTemp.formatData(p)));
     }
 }
 
