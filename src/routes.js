@@ -26,6 +26,7 @@ router.put('/products/:id', adminMiddleware, upload.single('image'), ProductCont
 router.get('/users', UserController.index);
 router.get('/products', ProductController.index);
 router.post('/categories', adminMiddleware, upload.single('image'), CategoryController.store);
+router.put('/categories/:id', adminMiddleware, upload.single('image'), CategoryController.update);
 router.get('/categories', CategoryController.index);
 
 export default router;
