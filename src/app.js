@@ -15,6 +15,7 @@ app.use(cors());
 app.use(express.json()); // habilita o parser de JSON
 app.use('/files', express.static(resolve(__dirname, '..', 'uploads')));
 app.use('/categories-files', express.static(resolve(__dirname, '..', 'uploads')));
+app.use('/products-files', express.static(resolve(__dirname, '..', 'uploads')));
 app.use(router);
 
 export default app;

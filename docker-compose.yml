@@ -3,16 +3,21 @@ services:
     build: .
     container_name: devburgerapi-server
     ports:
-      - "3001:3001"
+      - "127.0.0.1:8391:3001"
     volumes:
       - .:/usr/src/app
       - /usr/src/app/node_modules
     environment:
       - DB_HOST=db
+      # Continua "mongo:27017" porque essa é a porta INTERNA do container,
+      # dentro da rede Docker (não muda com o remapeamento de porta externa abaixo).
+      - MONGO_URL=mongodb://mongo:27017/devburguer
       - TZ=America/Sao_Paulo
     depends_on:
       db:
         condition: service_healthy
+      mongo:
+        condition: service_started
 
   db:
     image: postgres:15-alpine
@@ -25,7 +30,7 @@ services:
       - TZ=America/Sao_Paulo
       - PGTZ=America/Sao_Paulo
     ports:
-      - "5432:5432"
+      - "127.0.0.1:6547:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
     command: ["postgres", "-c", "timezone=America/Sao_Paulo"]
@@ -37,8 +42,18 @@ services:
       timeout: 5s
       retries: 5
 
+  mongo:
+    image: mongo:7
+    container_name: devburguer-mongo
+    restart: always
+    ports:
+      - "127.0.0.1:29841:27017"
+    volumes:
+      - mongodata:/data/db
+
 volumes:
   pgdata:
+  mongodata:
 
 secrets:
   db-password:
