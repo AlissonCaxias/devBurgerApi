@@ -16,8 +16,7 @@ class Category extends Model {
                 sequelize,
                 tableName: 'categories',
                 timestamps: true,
-                createdAt: 'created_at',
-                updatedAt: 'updated_at',
+                underscored: true, // Usa created_at e updated_at em vez de createdAt e updatedAt
             });
         return this;
     }
