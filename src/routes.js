@@ -37,7 +37,7 @@ router.get('/categories', CategoryController.index);
 router.post('/orders', OrderController.storeOrder); //rotas pra criar pedidos
 //router.get('/orders', OrderController.indexOrder); //rotas pra listar pedidos
 //router.get('/orders/:id', OrderController.showOrder); //rotas pra mostrar detalhes de um pedido específico
-//router.put('/orders/:id', OrderController.updateOrder); //rotas pra atualizar um pedido
+router.put('/orders/:id', adminMiddleware, OrderController.updateOrder); //rotas pra atualizar um pedido
 //router.delete('/orders/:id', OrderController.deleteOrder); //rotas pra deletar um pedido
 
 export default router;

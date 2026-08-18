@@ -2,10 +2,10 @@ const fs = require('node:fs');
 
 let dbPassword;
 try {
-  dbPassword = fs.readFileSync('/run/secrets/db-password', 'utf8').trim();
+	dbPassword = fs.readFileSync('/run/secrets/db-password', 'utf8').trim();
 } catch (err) {
-  // Se não encontrar o arquivo, usa uma senha padrão para teste
-  dbPassword = fs.readFileSync('./db/password.txt', 'utf8').trim() || '123456' || err.message;
+	// Se não encontrar o arquivo, usa uma senha padrão para teste
+	dbPassword = fs.readFileSync('./db/password.txt', 'utf8').trim() || '123456' || err.message;
 }
 
 module.exports = {
