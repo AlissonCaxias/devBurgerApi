@@ -161,6 +161,20 @@ class OrderController {
             return res.status(500).json({ error: 'Falha ao atualizar pedido' });
         }
     }
+
+    async indexOrder(req, res) {
+        try {
+            // Admin vê todos os pedidos; usuário comum vê só os próprios
+            const filter = req.userAdmin ? {} : { 'user.id': req.userId };
+
+            const orders = await Order.find(filter).sort({ createdAt: -1 });
+
+            return res.status(200).json(orders.map((order) => FormatterTemp.formatData(order)));
+        } catch (error) {
+            console.error('[OrderController.indexOrder] Erro:', error);
+            return res.status(500).json({ error: 'Falha ao listar pedidos' });
+        }
+    }
 }
 
 export default new OrderController();
